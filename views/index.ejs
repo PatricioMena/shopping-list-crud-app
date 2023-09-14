@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping List</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h2 class="center-align">Create a Shopping List</h2>
+    </div>
+  </header>
+  <main>
+    <div class="container card-panel">
+      <div>
+        <h5>Add Product</h5>
+        <div class="row">
+          <form class="col s12" action="/addItem" method="POST">
+            <div class="row valign-wrapper ">
+              <div class="input-field col s5">
+                <input id="item_name" type="text" name="itemName">
+                <label for="item_name">Item Name</label>
+              </div>
+              <div class="input-field col s5">
+                <input id="category_name" type="text" name="categoryName">
+                <label for="category_name">Category Name</label>
+              </div>
+              <div class="center-align col s2">
+                <button class="btn waves-effect waves-light" type="submit" name="action">Add Item
+                  <i class="fa fa-plus right"></i>
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+      <table class="striped">
+        <thead>
+          <tr>
+            <th>Item</th>
+            <th>Category</th>
+            <th>Qty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(let i=0; i < items.length; i++) {%>
+            <tr>
+              <td>
+                <%= items[i].itemName %>
+              </td>
+              <td>
+                <%= items[i].categoryName %>
+              </td>
+              <td>
+                <%= items[i].qty %>
+              </td>
+              <td>
+                <button class="del-btn btn red">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            <% } %>
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>
