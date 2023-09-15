@@ -28,8 +28,8 @@ app.get('/', async (req, res) => {
 
 app.post('/addItem', async (req, res) => {
   db.collection('items').insertOne({
-    itemName: req.body.itemName,
-    categoryName: req.body.categoryName,
+    itemName: req.body.itemName.trim(),
+    categoryName: req.body.categoryName.trim(),
     qty: 1
   });
   try {
@@ -37,6 +37,49 @@ app.post('/addItem', async (req, res) => {
     res.redirect('/');
   } catch (err) {
     console.error(err);
+  }
+});
+
+app.put('/plusOneItem', async (req, res) => {
+  try {
+    db.collection('items').updateOne(
+      {
+        itemName: req.body.itemNameS,
+        categoryName: req.body.categoryNameS,
+        qty: req.body.itemQtyS
+      },
+      {
+        // $set mongodb operator: replaces the value of a field with the specified value
+        $set: {
+          qty: req.body.itemQtyS + 1
+        }
+      }
+    );
+
+    res.json('Quantity added');
+  } catch (err) {
+    console.log(err);
+  }
+});
+
+app.put('/minusOneItem', async (req, res) => {
+  try {
+    db.collection('items').updateOne(
+      {
+        itemName: req.body.itemNameS,
+        categoryName: req.body.categoryNameS,
+        qty: req.body.itemQtyS
+      },
+      {
+        $set: {
+          qty: req.body.itemQtyS - 1
+        }
+      }
+    );
+
+    res.json('Quantity subtracted');
+  } catch (err) {
+    console.log(err);
   }
 });
 

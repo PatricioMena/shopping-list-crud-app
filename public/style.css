@@ -1,6 +1,6 @@
 header {
-  padding-top: 1.5rem;
-  margin-bottom: 4rem;
+  padding-top: 3rem;
+  margin-bottom: 1.5rem;
 }
 
 .container {
@@ -9,8 +9,16 @@ header {
   width: 100%;
 }
 
+h2 {
+  margin: 0;
+}
+
 .btn {
   border-radius: 4px;
+}
+
+.pointer-none {
+  pointer-events: none;
 }
 
 .card-panel {
@@ -21,7 +29,6 @@ header {
   font-size: 16px !important;
 }
 
-.fa-plus {
-  /* font-size: 16px !important; */
-  margin-left: 12px !important;
+.btn-col {
+  width: 10%;
 }

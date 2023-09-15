@@ -3,17 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopping List</title>
+  <title>Patricio Mena Shopping List</title>
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" integrity="sha512-UJfAaOlIRtdR+0P6C3KUoTDAxVTuy3lnSXLyLKlHYJlcSU8Juge/mjeaxDNMlw9LgeIotgz5FP8eUQPhX1q10A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="grey lighten-5">
   <header>
     <div class="container">
-      <h2 class="center-align">Create a Shopping List</h2>
+      <div class="card-panel ">
+        <h2 class="center-align"> Shopping List</h2>
+
+      </div>
     </div>
   </header>
   <main>
@@ -21,32 +24,47 @@
       <div>
         <h5>Add Product</h5>
         <div class="row">
-          <form class="col s12" action="/addItem" method="POST">
+          <form class="col s12 " action="/addItem" method="POST">
             <div class="row valign-wrapper ">
               <div class="input-field col s5">
                 <input id="item_name" type="text" name="itemName">
                 <label for="item_name">Item Name</label>
               </div>
               <div class="input-field col s5">
-                <input id="category_name" type="text" name="categoryName">
-                <label for="category_name">Category Name</label>
+                <select name="categoryName" id="category_name">
+                  <option value="Fruit & Vegetables" selected>Fruit & Vegetables</option>
+                  <option value="Meat & Seafood">Meat & Seafood</option>
+                  <option value="Bakery & Bread">Bakery & Bread</option>
+                  <option value="Dairy & Eggs">Dairy & Eggs</option>
+                  <option value="Deli">Deli</option>
+                  <option value="Pantry">Pantry</option>
+                  <option value="Frozen Foods">Frozen Foods</option>
+                  <option value="Beverages">Beverages</option>
+                  <option value="Everyday Essentials">Everyday Essentials</option>
+                  <option value="Health & Beauty">Health & Beauty"</option>
+                  <option value="Home & Outdoor">Home & Outdoor</option>
+                  <option value="Pets">Pets</option>
+                  <option value="Baby & Kids">Baby & Kids</option>
+                </select>
               </div>
               <div class="center-align col s2">
                 <button class="btn waves-effect waves-light" type="submit" name="action">Add Item
-                  <i class="fa fa-plus right"></i>
                 </button>
               </div>
             </div>
-
           </form>
         </div>
       </div>
+
       <table class="striped">
         <thead>
           <tr>
             <th>Item</th>
             <th>Category</th>
-            <th>Qty</th>
+            <th></th>
+            <th class="center-align">Qty</th>
+            <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -58,10 +76,21 @@
               <td>
                 <%= items[i].categoryName %>
               </td>
-              <td>
-                <%= items[i].qty %>
+              <td class="right-align">
+                <button class="btn subtract-item-btn teal lighten-3">
+                  <i class="fa fa-minus"></i>
+                </button>
               </td>
-              <td>
+              <td class="item-qty center-align">
+
+                <%=items[i].qty %>
+
+              </td>
+
+              <td class="left-align">
+                <button class="btn add-item-btn  teal lighten-1"><i class="fa fa-plus"></i></button>
+              </td>
+              <td class="center-align">
                 <button class="del-btn btn red">
                   <i class="fa fa-trash"></i>
                 </button>
@@ -75,5 +104,9 @@
 
   <script src="main.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script>
+    M.FormSelect.init(document.querySelector('#category_name'))
+  </script>
 </body>
 </html>
