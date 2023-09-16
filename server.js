@@ -62,7 +62,7 @@ app.put('/plusOneItem', async (req, res) => {
     );
     res.json('Quantity added');
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 });
 
@@ -83,7 +83,7 @@ app.put('/minusOneItem', async (req, res) => {
 
     res.json('Quantity subtracted');
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 });
 
