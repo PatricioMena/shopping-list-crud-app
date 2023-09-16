@@ -26,18 +26,18 @@ app.get('/', async (req, res) => {
   try {
     const shoppingItems = await db.collection('items').find().toArray();
     res.render('index.ejs', { items: shoppingItems });
-  } catch (err) {
+  } catch (error) {
     console.error(err);
   }
 });
 
 app.post('/addItem', async (req, res) => {
-  db.collection('items').insertOne({
-    itemName: req.body.itemName.trim(),
-    categoryName: req.body.categoryName.trim(),
-    qty: 1
-  });
   try {
+    await db.collection('items').insertOne({
+      itemName: req.body.itemName.trim(),
+      categoryName: req.body.categoryName.trim(),
+      qty: 1
+    });
     console.log('Item added');
     res.redirect('/');
   } catch (err) {
@@ -47,7 +47,7 @@ app.post('/addItem', async (req, res) => {
 
 app.put('/plusOneItem', async (req, res) => {
   try {
-    db.collection('items').updateOne(
+    await db.collection('items').updateOne(
       {
         itemName: req.body.itemNameS,
         categoryName: req.body.categoryNameS,
@@ -60,7 +60,6 @@ app.put('/plusOneItem', async (req, res) => {
         }
       }
     );
-
     res.json('Quantity added');
   } catch (err) {
     console.log(err);
@@ -69,7 +68,7 @@ app.put('/plusOneItem', async (req, res) => {
 
 app.put('/minusOneItem', async (req, res) => {
   try {
-    db.collection('items').updateOne(
+    await db.collection('items').updateOne(
       {
         itemName: req.body.itemNameS,
         categoryName: req.body.categoryNameS,
@@ -90,7 +89,7 @@ app.put('/minusOneItem', async (req, res) => {
 
 app.delete('/deleteItem', async (req, res) => {
   try {
-    db.collection('items').deleteOne({ itemName: req.body.itemNameS });
+    await db.collection('items').deleteOne({ itemName: req.body.itemNameS });
     res.json('Product Deleted');
   } catch (err) {
     console.error(err);
