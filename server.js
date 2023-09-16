@@ -23,7 +23,11 @@ app.use(express.json()); // telling express to recognize the incoming request ob
 
 app.get('/', async (req, res) => {
   const shoppingItems = await db.collection('items').find().toArray();
-  res.render('index.ejs', { items: shoppingItems });
+  try {
+    res.render('index.ejs', { items: shoppingItems });
+  } catch (err) {
+    console.error(err);
+  }
 });
 
 app.post('/addItem', async (req, res) => {
