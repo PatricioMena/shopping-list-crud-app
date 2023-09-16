@@ -22,8 +22,8 @@ app.use(express.urlencoded({ extended: true })); // tool that helps server under
 app.use(express.json()); // telling express to recognize the incoming request object as JSON object
 
 app.get('/', async (req, res) => {
-  const shoppingItems = await db.collection('items').find().toArray();
   try {
+    const shoppingItems = await db.collection('items').find().toArray();
     res.render('index.ejs', { items: shoppingItems });
   } catch (err) {
     console.error(err);
