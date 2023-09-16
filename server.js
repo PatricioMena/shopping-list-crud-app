@@ -20,6 +20,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true })); // tool that helps server understand the data sent from website. incoming request object as string or array
 app.use(express.json()); // telling express to recognize the incoming request object as JSON object
+app.use(cors());
 
 app.get('/', async (req, res) => {
   try {
