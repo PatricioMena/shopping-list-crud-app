@@ -26,7 +26,7 @@ app.get('/', async (req, res) => {
   try {
     const shoppingItems = await db.collection('items').find().toArray();
     res.render('index.ejs', { items: shoppingItems });
-  } catch (error) {
+  } catch (err) {
     console.error(err);
   }
 });
