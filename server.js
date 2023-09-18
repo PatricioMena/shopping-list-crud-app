@@ -6,11 +6,13 @@ require('dotenv').config();
 
 let db,
   dbConnectionString = process.env.DB_STRING,
-  dbName = 'shopping-list';
+  dbName = 'shopping-list',
+  collection;
 
 MongoClient.connect(dbConnectionString).then((client) => {
   console.log('Connected to shopping list database');
   db = client.db(dbName);
+  collection = db.collection('items');
 });
 
 // EJS
@@ -24,7 +26,7 @@ app.use(cors());
 
 app.get('/', async (req, res) => {
   try {
-    const shoppingItems = await db.collection('items').find().toArray();
+    const shoppingItems = await collection.find().toArray();
     res.render('index.ejs', { items: shoppingItems });
   } catch (err) {
     console.error(err);
@@ -33,7 +35,7 @@ app.get('/', async (req, res) => {
 
 app.post('/addItem', async (req, res) => {
   try {
-    await db.collection('items').insertOne({
+    await collection.insertOne({
       itemName: req.body.itemName.trim(),
       categoryName: req.body.categoryName.trim(),
       qty: 1
@@ -47,7 +49,7 @@ app.post('/addItem', async (req, res) => {
 
 app.put('/plusOneItem', async (req, res) => {
   try {
-    await db.collection('items').updateOne(
+    await collection.updateOne(
       {
         itemName: req.body.itemNameS,
         categoryName: req.body.categoryNameS,
@@ -68,7 +70,7 @@ app.put('/plusOneItem', async (req, res) => {
 
 app.put('/minusOneItem', async (req, res) => {
   try {
-    await db.collection('items').updateOne(
+    await collection.updateOne(
       {
         itemName: req.body.itemNameS,
         categoryName: req.body.categoryNameS,
