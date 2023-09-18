@@ -23,32 +23,27 @@ app.use(express.json()); // telling express to recognize the incoming request ob
 app.use(cors());
 
 app.get('/', async (req, res) => {
-  try {
-    const shoppingItems = await db.collection('items').find().toArray();
-    console.log(shoppingItems);
-    res.render('index.ejs', { items: shoppingItems });
-  } catch (err) {
-    console.error(err);
-  }
+  const shoppingItems = await db.collection('items').find().toArray();
+  res.render('index.ejs', { items: shoppingItems });
 });
 
-app.post('/addItem', async (req, res) => {
-  try {
-    await db.collection('items').insertOne({
+app.post('/addItem', (req, res) => {
+  db.collection('items')
+    .insertOne({
       itemName: req.body.itemName.trim(),
       categoryName: req.body.categoryName.trim(),
       qty: 1
-    });
-    console.log('Item added');
-    res.redirect('/');
-  } catch (err) {
-    console.error(err);
-  }
+    })
+    .then((result) => {
+      console.log('Item added');
+      res.redirect('/');
+    })
+    .catch((error) => console.error(error));
 });
 
-app.put('/plusOneItem', async (req, res) => {
-  try {
-    await db.collection('items').updateOne(
+app.put('/plusOneItem', (req, res) => {
+  db.collection('items')
+    .updateOne(
       {
         itemName: req.body.itemNameS,
         categoryName: req.body.categoryNameS,
@@ -60,41 +55,44 @@ app.put('/plusOneItem', async (req, res) => {
           qty: req.body.itemQtyS + 1
         }
       }
-    );
-    res.json('Quantity added');
-  } catch (err) {
-    console.error(err);
-  }
+    )
+    .then((result) => {
+      console.log('Quantity added');
+      res.json('Quantity added');
+    })
+    .catch((error) => console.error(error));
 });
 
 app.put('/minusOneItem', async (req, res) => {
-  try {
-    await db.collection('items').updateOne(
+  db.collection('items')
+    .updateOne(
       {
         itemName: req.body.itemNameS,
         categoryName: req.body.categoryNameS,
         qty: req.body.itemQtyS
       },
       {
+        // $set mongodb operator: replaces the value of a field with the specified value
         $set: {
           qty: req.body.itemQtyS - 1
         }
       }
-    );
-
-    res.json('Quantity subtracted');
-  } catch (err) {
-    console.error(err);
-  }
+    )
+    .then((result) => {
+      console.log('Quantity subtracted');
+      res.json('Quantity subtracted');
+    })
+    .catch((error) => console.error(error));
 });
 
 app.delete('/deleteItem', async (req, res) => {
-  try {
-    await db.collection('items').deleteOne({ itemName: req.body.itemNameS });
-    res.json('Product Deleted');
-  } catch (err) {
-    console.error(err);
-  }
+  db.collection('items')
+    .deleteOne({ itemName: req.body.itemNameS })
+    .then((result) => {
+      console.log('Produce deleted');
+      res.json('Product deleted');
+    })
+    .catch((error) => console.error(error));
 });
 
 app.listen(process.env.PORT || 2121, () => {
