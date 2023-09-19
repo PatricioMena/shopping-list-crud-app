@@ -3,6 +3,8 @@ Shopping list app. Create a product name, choose it's category and add the item 
 
 **Full App:** https://shopping-list-app-bn5h.onrender.com/
 
+![image](https://github.com/PatricioMena/shopping-list-crud-app/assets/89497069/db5e1284-3a7c-4c53-8d31-915c215e5031)
+
 ## How it's made:
 **Tech used:** Node, Express, EJS, MongoDB, Materialize 
 
