@@ -1,4 +1,4 @@
-# shopping-list-crud-app
+# Shopping List App
 Shopping list app. Create a product name, choose it's category and add the item to your list. Once on the list you can update the quantity of each product on the list and delete it
 
 ## How it's made:
