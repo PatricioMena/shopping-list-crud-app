@@ -5,7 +5,7 @@ Shopping list app. Create a product name, choose it's category and add the item 
 **bold text**Tech used: Node, Express, EJS, MongoDB, Materialize 
 
 ### Frontend 
-I use [mat](https://materializecss.com/) for the front end and write a little CSS on the public folder
+I use [materializecss](https://materializecss.com/) for the front end and write a little CSS on the public folder
 
 ### Backend
 Express server running on Node environment that listen to requests from the client and connect to a MongoDB database. It can add, retrieve and delete items from the db collection. The PUT and DELETE method are fetched from the client side JavaScript.
