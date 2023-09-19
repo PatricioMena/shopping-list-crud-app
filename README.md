@@ -1,5 +1,5 @@
 # Shopping List App
-Shopping list app. Create a product name, choose it's category and add the item to your list. Once on the list you can update the quantity of each product on the list and delete it
+Shopping list app. Create a product name, choose category and add the item to your list. Once on the list you can update the quantity of each product on the list and delete it
 
 **Full App:** https://shopping-list-app-bn5h.onrender.com/
 
