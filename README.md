@@ -2,7 +2,7 @@
 Shopping list app. Create a product name, choose it's category and add the item to your list. Once on the list you can update the quantity of each product on the list and delete it
 
 ## How it's made:
-**bold text**Tech used: Node, Express, EJS, MongoDB, Materialize 
+**bold text** Tech used: Node, Express, EJS, MongoDB, Materialize 
 
 ### Frontend 
 I use [materializecss](https://materializecss.com/) for the front end and write a little CSS on the public folder
